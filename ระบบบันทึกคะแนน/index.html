@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>ระบบบันทึกคะแนน SCI-AWARDS</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+</head>
+
+<body class="bg-gray-100">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300&display=swap');
+
+        * {
+            font-family: 'Chakra Petch', sans-serif;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        li {
+            cursor: pointer;
+            /* เปลี่ยน cursor เป็น pointer */
+        }
+    </style>
+
+
+    <div class="antialiased bg-gray-50 dark:bg-gray-900">
+        <nav
+            class="bg-white border-b border-gray-200 px-4 py-2.5 dark:bg-gray-800 dark:border-gray-700 fixed left-0 right-0 top-0 z-50">
+            <div class="flex flex-wrap justify-between items-center">
+                <div class="flex justify-start items-center">
+
+                    <a href="https://sci.rmutp.ac.th" class="flex items-center justify-between mr-4">
+                        <img src="https://sci.rmutp.ac.th/web2558/wp-content/uploads/2017/11/SciRMUTP-Thai-300x295.png"
+                            class="mr-3 h-8" alt="Flowbite Logo" />
+                        <span
+                            class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">ระบบบันทึกผลคะแนนการประกวด
+                            SCIENCE AWARDS 2025</span>
+                    </a>
+                </div>
+                <div class="flex items-center lg:order-2">
+                    <button type="button" data-drawer-toggle="drawer-navigation" aria-controls="drawer-navigation"
+                        class="p-2 mr-1 text-gray-500 rounded-lg md:hidden hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600">
+                        <span class="sr-only">Toggle search</span>
+                        <svg aria-hidden="true" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path clip-rule="evenodd" fill-rule="evenodd"
+                                d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z">
+                            </path>
+                        </svg>
+                    </button>
+
+                    <!-- Apps -->
+
+                    <!-- Dropdown menu -->
+
+                    <button type="button"
+                        class="flex mx-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+                        id="user-menu-button" aria-expanded="false" data-dropdown-toggle="dropdown">
+                        <span class="sr-only">Open user menu</span>
+                        <img class="w-8 h-8 rounded-full" id="user-photo"
+                            src="https://science-awards.pages.dev/img/avatar.png" alt="user photo" />
+                    </button>
+                    <!-- Dropdown menu -->
+                    <div class="hidden z-50 my-4 w-56 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 rounded-xl"
+                        id="dropdown">
+                        <div class="py-3 px-4">
+                            <span class="block text-sm font-semibold text-gray-900 dark:text-white" id="user-name">
+                                กรรมการคนที่ 1</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </nav>
+
+        <!-- Sidebar -->
+
+        <button data-drawer-target="default-sidebar" data-drawer-toggle="default-sidebar"
+            aria-controls="default-sidebar" type="button"
+            class="inline-flex items-center p-2 mt-2 ml-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+            <span class="sr-only">Open sidebar</span>
+            <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg">
+                <path clip-rule="evenodd" fill-rule="evenodd"
+                    d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z">
+                </path>
+            </svg>
+        </button>
+
+        <aside id="default-sidebar"
+            class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
+            aria-label="Sidenav">
+            <div
+                class="overflow-y-auto py-5 px-3 h-full bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+                <ul class="space-y-2">
+                    <li>
+                        <a href="#"
+                            class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                            <svg aria-hidden="true"
+                                class="w-6 h-6 text-gray-400 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                                fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
+                                <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
+                            </svg>
+                            <span class="ml-3">Overview</span>
+                        </a>
+                    </li>
+                    <li>
+                        <button type="button"
+                            class="flex items-center p-2 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                            aria-controls="dropdown-pages" data-collapse-toggle="dropdown-pages"
+                            onclick="showPage('home')">
+                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                viewBox="0 0 24 24">
+                                <path fill-rule="evenodd"
+                                    d="M11.293 3.293a1 1 0 0 1 1.414 0l6 6 2 2a1 1 0 0 1-1.414 1.414L19 12.414V19a2 2 0 0 1-2 2h-3a1 1 0 0 1-1-1v-3h-2v3a1 1 0 0 1-1 1H7a2 2 0 0 1-2-2v-6.586l-.293.293a1 1 0 0 1-1.414-1.414l2-2 6-6Z"
+                                    clip-rule="evenodd" />
+                            </svg>
+
+                            <span class="flex-1 ml-3 text-left whitespace-nowrap">หน้าหลัก</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button type="button"
+                            class="flex items-center p-2 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                            aria-controls="dropdown-sales" data-collapse-toggle="dropdown-sales"
+                            onclick="showPage('contestant')">
+                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                viewBox="0 0 24 24">
+                                <path fill-rule="evenodd"
+                                    d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4h-4Z"
+                                    clip-rule="evenodd" />
+                            </svg>
+
+
+                            <span class="flex-1 ml-3 text-left whitespace-nowrap">ผู้เข้าประกวด</span>
+                        </button>
+                    </li>
+
+                    <li onclick="showPage('system')">
+                        <button type="button"
+                            class="flex items-center p-2 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                            aria-controls="dropdown-sales" data-collapse-toggle="dropdown-sales"
+                            onclick="showPage('dashboard')">
+                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                viewBox="0 0 24 24">
+                                <path fill-rule="evenodd"
+                                    d="M5 8a4 4 0 1 1 7.796 1.263l-2.533 2.534A4 4 0 0 1 5 8Zm4.06 5H7a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h2.172a2.999 2.999 0 0 1-.114-1.588l.674-3.372a3 3 0 0 1 .82-1.533L9.06 13Zm9.032-5a2.907 2.907 0 0 0-2.056.852L9.967 14.92a1 1 0 0 0-.273.51l-.675 3.373a1 1 0 0 0 1.177 1.177l3.372-.675a1 1 0 0 0 .511-.273l6.07-6.07a2.91 2.91 0 0 0-.944-4.742A2.907 2.907 0 0 0 18.092 8Z"
+                                    clip-rule="evenodd" />
+                            </svg>
+
+
+                            <span class="flex-1 ml-3 text-left whitespace-nowrap">ระบบบันทึกผลคะแนน</span>
+                        </button>
+                    </li>
+
+
+                    <li onclick="showPage('criteria')">
+                        <a
+                            class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                viewBox="0 0 24 24">
+                                <path fill-rule="evenodd"
+                                    d="M8 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1h2a2 2 0 0 1 2 2v15a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h2Zm6 1h-4v2H9a1 1 0 0 0 0 2h6a1 1 0 1 0 0-2h-1V4Zm-6 8a1 1 0 0 1 1-1h6a1 1 0 1 1 0 2H9a1 1 0 0 1-1-1Zm1 3a1 1 0 1 0 0 2h6a1 1 0 1 0 0-2H9Z"
+                                    clip-rule="evenodd" />
+                            </svg>
+
+
+                            <span class="flex-1 ml-3 whitespace-nowrap">เกณฑ์การประกวด</span>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="pt-5 mt-5 space-y-2 border-t border-gray-200 dark:border-gray-700">
+                    <li>
+                        <a href="https://drive.google.com/file/d/1kkGXFoyl3Ds-LUCtBSTrgsFIvr0GAURm/view" target="_blank"
+                            class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group">
+                            <svg class="w-[24px] h-[24px] text-gray-800 dark:text-white" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M6 16v-3h.375a.626.626 0 0 1 .625.626v1.749a.626.626 0 0 1-.626.625H6Zm6-2.5a.5.5 0 1 1 1 0v2a.5.5 0 0 1-1 0v-2Z" />
+                                <path fill-rule="evenodd"
+                                    d="M11 7V2h7a2 2 0 0 1 2 2v5h1a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1h-1a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2H3a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1h6a2 2 0 0 0 2-2Zm7.683 6.006 1.335-.024-.037-2-1.327.024a2.647 2.647 0 0 0-2.636 2.647v1.706a2.647 2.647 0 0 0 2.647 2.647H20v-2h-1.335a.647.647 0 0 1-.647-.647v-1.706a.647.647 0 0 1 .647-.647h.018ZM5 11a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h1.376A2.626 2.626 0 0 0 9 15.375v-1.75A2.626 2.626 0 0 0 6.375 11H5Zm7.5 0a2.5 2.5 0 0 0-2.5 2.5v2a2.5 2.5 0 0 0 5 0v-2a2.5 2.5 0 0 0-2.5-2.5Z"
+                                    clip-rule="evenodd" />
+                                <path d="M9 7V2.221a2 2 0 0 0-.5.365L4.586 6.5a2 2 0 0 0-.365.5H9Z" />
+                            </svg>
+
+                            <span class="ml-3">คู่มือการใช้งาน</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+
+        <main class="p-4 md:ml-64 h-auto pt-20">
+
+            <div id="home" class="page active">
+
+
+                <div
+                    class="w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    <ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 rounded-t-lg bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:bg-gray-800"
+                        id="defaultTab" data-tabs-toggle="#defaultTabContent" role="tablist">
+                        <li class="me-2">
+                            <button id="about-tab" data-tabs-target="#about" type="button" role="tab"
+                                aria-controls="about" aria-selected="true"
+                                class="inline-block p-4 text-blue-600 rounded-ss-lg hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-blue-500">🙏
+                                ยินดีต้อนรับท่านคณะกรรมการ 🙏</button>
+                        </li>
+                    </ul>
+                    <div id="defaultTabContent">
+                        <div class="p-4 bg-white rounded-lg md:p-8 dark:bg-gray-800" id="about" role="tabpanel"
+                            aria-labelledby="about-tab">
+                            <p class="mb-3 text-gray-500 dark:text-gray-400">
+                                ระบบนี้เป็นระบบบันทึกผลคะแนนการประกวด SCIENCE AWARDS 2025 <br />
+                                โปรดอ่านคู่มือและคำแนะนำการใช้งานก่อนเริ่มใช้งานระบบ <br />
+                                หากท่านคณะกรรมการมีข้อสงสัยในการใช้งานระบบหรือพบข้อผิดพลาดของระบบ โปรดแจ้ง STAFF
+                                ในกิจกรรมทันที <br />
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <br />
+
+                <div
+                    class="w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    <ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 rounded-t-lg bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:bg-gray-800"
+                        id="defaultTab1" data-tabs-toggle="#defaultTabContent1" role="tablist">
+                        <li class="me-2">
+                            <button id="about-tab" data-tabs-target="#about1" type="button" role="tab"
+                                aria-controls="about" aria-selected="true"
+                                class="inline-block p-4 text-blue-600 rounded-ss-lg hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-blue-500">คู่มือการใช้งานและคำแนะนำ</button>
+                        </li>
+                    </ul>
+                    <div id="defaultTabContent1">
+                        <div class="p-4 bg-white rounded-lg md:p-8 dark:bg-gray-800" id="about1" role="tabpanel"
+                            aria-labelledby="about-tab1">
+                            <p class="mb-3 text-gray-500 dark:text-gray-400">
+                                <a href="https://drive.google.com/file/d/1kkGXFoyl3Ds-LUCtBSTrgsFIvr0GAURm/view"
+                                    target="_blank">👆 คลิกที่นี่เพื่อไปยังคู่มือการใช้งานระบบ</a>
+                                <br /><br />
+                                <a href="https://youtu.be/UBLQjjdjiUE" target="_blank">👆
+                                    คลิกที่นี่เพื่อไปยังวิดีโอสาธิตการใช้งานระบบ</a>
+                                <br /><br />
+                            <h6 class="font-weight-bold">❗คำแนะนำ : ห้ามรีเฟรชหน้าเว็บขณะกำลังประมวลผลข้อมูล
+                                บันทึกข้อมูล จะทำให้เกิดข้อผิดพลาดได้</h6><br />
+                            <h6 class="font-weight-bold">❗คำแนะนำ : การใช้งานระบบบนแล็ปท็อปหรือคอมพิวเตอร์
+                                จะให้การแสดงผลและประสบการณ์การใช้งานที่ดีกว่า</h6><br />
+                            <h6 class="font-weight-bold">❗คำแนะนำ : กรณีที่ระบบให้การแสดงผลที่ใหญ่หรือเล็กเกินไป
+                                ท่านสามารถกดปุ่มคอนโทรล(Ctrl)ค้างไว้พร้อมกับเลื่อนลูกกลิ้งเม้าส์เพื่อปรับขนาดการแสดงผลได้
+                            </h6><br />
+                            <h6 class="font-weight-bold">❗คำเตือน :
+                                เมื่อรีเฟรชหน้าเว็บเซสชั่นการเข้าสู่ระบบจะหมดอายุทันที ให้เข้าสู่ระบบด้วยบัญชี Google
+                                อีกครั้ง</h6><br />
+                            <h6 class="font-weight-bold">❗คำเตือน : เมื่อใช้งานระบบเสร็จสิ้นให้ออกจากระบบทุกครั้ง
+                                เพื่อความปลอดภัยของผลการแข่งขันจากผู้ไม่หวังดี</h6><br />
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <br />
+
+                <br />
+
+                <div
+                    class="w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    <ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 rounded-t-lg bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:bg-gray-800"
+                        id="defaultTab" data-tabs-toggle="#defaultTabContent" role="tablist">
+                        <li class="me-2">
+                            <button id="about-tab" data-tabs-target="#about" type="button" role="tab"
+                                aria-controls="about" aria-selected="true"
+                                class="inline-block p-4 text-blue-600 rounded-ss-lg hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-blue-500">
+                                เกี่ยวกับระบบ</button>
+                        </li>
+                    </ul>
+                    <div id="defaultTabContent">
+                        <div class="p-4 bg-white rounded-lg md:p-8 dark:bg-gray-800" id="about" role="tabpanel"
+                            aria-labelledby="about-tab">
+                            <p class="mb-3 text-gray-500 dark:text-gray-400">
+                                ระบบนี้เป็นระบบบันทึกผลคะแนนการประกวดดาว-เดือน คณะวิทยาศาสตร์และเทคโนโลยี (SCIENCE
+                                AWARDS 2025) <br />
+                                มหาวิทยาลัยเทคโนโลยีราชมงคลพระนคร ศูนย์พระนครเหนือ <br />
+                                พัฒนาระบบโดย : ธีรชานนท์ พวงเงิน นักศึกษาสาขาวิทยาการคอมพิวเตอร์ <br />
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+            </div>
+
+            <div id="system" class="page">
+                <?!= include('system'); ?>
+            </div>
+
+            <div id="contestant" class="page">
+                <iframe
+                    src="https://science-awards.pages.dev/contestant/"
+                    width="100%" height="2000px" frameBorder="0" class="bg-light"></iframe>
+            </div>
+
+            <div id="criteria" class="page">
+                <?!= include('criteria'); ?>
+            </div>
+            
+
+
+
+
+
+
+
+        </main>
+
+        <footer class="justify-center">
+            <p class="mb-4 text-sm text-center text-gray-500 dark:text-gray-400 sm:mb-0">
+                <span class="block">&copy; 2024-2025 พัฒนาระบบโดย : ธีรชานนท์ พวงเงิน</span>
+                <span class="block">ระบบบันทึกผลคะแนนการประกวด SCIENCE AWARDS 2025 เวอร์ชั่น 1.0</span>
+            </p>
+
+        </footer>
+    </div>
+
+
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function showPage(pageId) {
+            // ซ่อนทุกหน้า
+            var pages = document.querySelectorAll('.page');
+            pages.forEach(function (page) {
+                page.classList.remove('active');
+            });
+
+            // แสดงหน้าที่ต้องการ
+            var targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+            }
+        }
+    </script>
+</body>
+
+</html>

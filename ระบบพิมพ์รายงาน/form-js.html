@@ -1,0 +1,382 @@
+<script>
+    function Message(){
+       
+       this.Execute = function (){
+       var Width = window.innerWidth;
+       var Height = window.innerHeigth;
+       
+       var Objek = document.getElementById("Komponen");
+       var Box = document.getElementById("BoxMessage");
+       
+       Objek.style.display = "block";
+       Objek.style.heigth = Height+ "px";
+       
+       Box.style.left = (Width/2) - (550 * .5)+"px";
+       Box.style.top = "70px";
+       Box.style.display = "block";
+       
+     document.getElementById("JudulMsg").innerHTML = "Warning!";
+     document.getElementById("IsiMsg").innerHTML = "Are you sure you want to delete this data?";
+     document.getElementById("AkhirMsg").innerHTML = '<button class = "green" onclick= "Confirm.Hapus()"> <b> <font color= "black" size = "3">YES</font></b></button><button class = "red" onclick= "Confirm.Tidak()"> <b><font color= "black"  size = "3">NO</font></b></button>';                                                                                                               
+           
+     }
+       
+    this.Tidak = function (){   
+    Tutup();   
+    }
+        
+    this.Hapus = function (){
+       
+    document.getElementById("AkhirMsg").innerHTML = '<button onclick= "Tutup()"> <b> <font color= "black" size = "3">Closed</font></b></button>';
+        
+       var kriteria = document.getElementById("Jnc1").value;
+       
+       if (kriteria.trim().length ==0){ 
+        document.getElementById("IsiMsg").innerHTML = "Canceled! Roll NO cannot be empty!";
+       
+        }else{
+             
+           google.script.run.withSuccessHandler(Muat).HapusData(kriteria);
+      
+            function Muat(kembali){  
+       
+              if (kembali != "Data Not Found!"){
+    
+                  document.getElementById("IsiMsg").innerHTML = "Data deleted successfully!";
+    
+                Bersih();
+    
+               }else{ 
+    
+                  document.getElementById("IsiMsg").innerHTML = "Data Not Found!";
+    
+            }    
+           }
+         }
+        }
+       }   
+    
+    var Confirm = new Message();
+    
+    function boxMsgBox(m){
+    
+       var Width = window.innerWidth;
+       var Height = window.innerHeigth;
+       
+       var Objek = document.getElementById("Komponen");
+       var Box = document.getElementById("BoxMessage");
+       
+       Objek.style.display = "block";
+       Objek.style.heigth = Height+ "px";
+       
+       Box.style.left = (Width/2) - (550 * .5)+"px";
+       Box.style.top = "70px";
+       Box.style.display = "block";        
+    
+      document.getElementById("JudulMsg").innerHTML = "Warning!"; 
+      document.getElementById("IsiMsg").innerHTML = m;
+      document.getElementById("AkhirMsg").innerHTML = '<button class = "orange" onclick= " Tutup()"> <b> <font color= "black" size = "3">Closed</font></b></button>';
+    
+    }
+    
+    function Tutup(){
+    document.getElementById("BoxMessage").style.display = "none";
+    document.getElementById("Komponen").style.display = "none";
+    }
+    
+    document.getElementById("btncari").addEventListener("click", Cari);
+     
+      function Cari(){  
+      
+      var kriteria = document.getElementById("Jnc1").value;
+      
+      if (kriteria.trim().length == 0){  
+       var m = "Roll NO is required!";
+       boxMsgBox(m);
+       return false;
+      };   
+      
+      google.script.run.withSuccessHandler(Muat).CariData(kriteria);
+      
+      function Muat(kembali){  
+       
+      if (kembali != "Data Not Found!"){
+      
+      document.getElementById("Jnc1").value = kembali[0]
+      M.updateTextFields();
+      document.getElementById("Jnc2").value = kembali[1]
+      M.updateTextFields();
+      document.getElementById("Jnc3").value = kembali[2]
+      M.updateTextFields();
+      document.getElementById("Jnc4").value = kembali[3]
+      M.updateTextFields();
+      document.getElementById("Jnc5").value = kembali[4]
+      M.updateTextFields();
+      document.getElementById("Jnc6").value = kembali[5]
+      M.updateTextFields();
+      document.getElementById("Jnc7").value = kembali[6]
+      M.updateTextFields();
+      document.getElementById("Jnc8").value = kembali[7]
+      M.updateTextFields();
+      document.getElementById("Jnc9").value = kembali[8]
+      M.updateTextFields();
+      document.getElementById("Jnc10").value = kembali[9]
+      M.updateTextFields();
+      document.getElementById("Jnc11").value = kembali[10]
+      M.updateTextFields();
+      document.getElementById("Jnc12").value = kembali[11]
+      M.updateTextFields();
+      document.getElementById("Jnc13").value = kembali[12]
+      M.updateTextFields();
+      document.getElementById("Jnc14").value = kembali[13]
+      M.updateTextFields();
+      document.getElementById("Jnc15").value = kembali[14]
+      M.updateTextFields();
+      document.getElementById("Jnc16").value = kembali[15]
+      M.updateTextFields();
+      document.getElementById("Jnc17").value = kembali[16]
+      M.updateTextFields();
+      document.getElementById("Jnc18").value = kembali[17]
+      M.updateTextFields();
+      document.getElementById("Jnc19").value = kembali[18]
+      M.updateTextFields();
+      document.getElementById("Jnc20").value = kembali[19]
+      M.updateTextFields();
+      document.getElementById("Jnc21").value = kembali[20]
+      M.updateTextFields();
+      document.getElementById("Jnc22").value = kembali[21]
+      M.updateTextFields();
+      document.getElementById("Jnc23").value = kembali[22]
+      M.updateTextFields();
+      document.getElementById("Jnc24").value = kembali[23]
+      M.updateTextFields();
+      document.getElementById("Jnc25").value = kembali[24]
+      M.updateTextFields();
+      document.getElementById("Jnc26").value = kembali[25]
+      M.updateTextFields();
+      document.getElementById("Jnc27").value = kembali[26]
+      M.updateTextFields();
+      document.getElementById("Jnc28").value = kembali[27]
+      M.updateTextFields();
+    
+      }else{
+      
+       var m = "Data Not Found!";
+       boxMsgBox(m);
+       Bersih ();
+       
+      }
+      }
+      }
+      
+      document.getElementById("btnbersih").addEventListener("click", Bersih);
+     
+      function Bersih (){  
+      document.getElementById("Jnc1").value = "";
+      document.getElementById("Jnc2").value = "";
+      document.getElementById("Jnc3").value = "";
+      document.getElementById("Jnc4").value = "";
+      document.getElementById("Jnc5").value = "";
+      document.getElementById("Jnc6").value = ""; 
+      document.getElementById("Jnc7").value = "";
+      document.getElementById("Jnc8").value = "";
+      document.getElementById("Jnc9").value = "";
+      document.getElementById("Jnc10").value = "";
+      document.getElementById("Jnc11").value = "";
+      document.getElementById("Jnc12").value = "";
+      document.getElementById("Jnc13").value = "";
+      document.getElementById("Jnc14").value = ""; 
+      document.getElementById("Jnc15").value = "";
+      document.getElementById("Jnc16").value = ""; 
+      document.getElementById("Jnc17").value = "";
+      document.getElementById("Jnc18").value = "";
+      document.getElementById("Jnc19").value = "";
+      document.getElementById("Jnc20").value = "";
+      document.getElementById("Jnc21").value = "";
+      document.getElementById("Jnc22").value = ""; 
+      document.getElementById("Jnc23").value = "";  
+      document.getElementById("Jnc24").value = "";  
+      document.getElementById("Jnc25").value = "";  
+      document.getElementById("Jnc26").value = "";  
+      document.getElementById("Jnc27").value = "";  
+      document.getElementById("Jnc28").value = "";   
+      }
+          
+      document.getElementById("btnsimpan").addEventListener("click", Simpan);
+       
+       function Simpan(){
+       
+       var Jnc1 = document.getElementById("Jnc1").value;
+       var Jnc2 = document.getElementById("Jnc2").value;
+       var Jnc3 = document.getElementById("Jnc3").value;
+       var Jnc4 = document.getElementById("Jnc4").value;
+       var Jnc5 = document.getElementById("Jnc5").value;
+       var Jnc6 = document.getElementById("Jnc6").value; 
+       var Jnc7 = document.getElementById("Jnc7").value;
+       var Jnc8 = document.getElementById("Jnc8").value;
+       var Jnc9 = document.getElementById("Jnc9").value;
+       var Jnc10 = document.getElementById("Jnc10").value;
+       var Jnc11 = document.getElementById("Jnc11").value;
+       var Jnc12 = document.getElementById("Jnc12").value;
+       var Jnc13 = document.getElementById("Jnc13").value;
+       var Jnc14 = document.getElementById("Jnc14").value; 
+       var Jnc15 = document.getElementById("Jnc15").value;
+       var Jnc16 = document.getElementById("Jnc16").value;
+       var Jnc17 = document.getElementById("Jnc17").value;
+       var Jnc18 = document.getElementById("Jnc18").value;
+       var Jnc19 = document.getElementById("Jnc19").value;
+       var Jnc20 = document.getElementById("Jnc20").value;
+       var Jnc21 = document.getElementById("Jnc21").value;
+       var Jnc22 = document.getElementById("Jnc22").value; 
+       var Jnc23 = document.getElementById("Jnc23").value; 
+       var Jnc24 = document.getElementById("Jnc24").value; 
+       var Jnc25 = document.getElementById("Jnc25").value; 
+       var Jnc26 = document.getElementById("Jnc26").value; 
+       var Jnc27 = document.getElementById("Jnc27").value; 
+       var Jnc28 = document.getElementById("Jnc28").value; 
+       if (Jnc1.trim().length != 0){
+       var m = "ID harus kosong karena terisi secara otomatis!";
+       boxMsgBox(m);
+       return false;   
+       }
+       
+    if (Jnc2.trim().length == 0 || Jnc3.trim().length == 0 || Jnc4.trim().length == 0 || Jnc5.trim().length == 0 || Jnc6.trim().length == 0 || Jnc7.trim().length == 0 || Jnc8.trim().length == 0 || Jnc9.trim().length == 0 || Jnc10.trim().length == 0 || Jnc11.trim().length == 0 || Jnc12.trim().length == 0 || Jnc13.trim().length == 0 || Jnc14.trim().length == 0|| Jnc15.trim().length == 0 || Jnc16.trim().length == 0 || Jnc17.trim().length == 0 || Jnc18.trim().length == 0 || Jnc19.trim().length == 0 || Jnc20.trim().length == 0|| Jnc21.trim().length == 0 || Jnc22.trim().length == 0 || Jnc23.trim().length == 0|| Jnc24.trim().length == 0|| Jnc25.trim().length == 0|| Jnc26.trim().length == 0|| Jnc27.trim().length == 0|| Jnc28.trim().length == 0){ 
+       
+       var m = "Isi semua kolom kecuali kolom NISN!";
+       boxMsgBox(m);
+        return; 
+           
+       }else{
+       
+     var Data ={ 
+     Jnc2: Jnc2,
+     Jnc3: Jnc3,
+     Jnc4: Jnc4,
+     Jnc5: Jnc5,
+     Jnc6: Jnc6,
+     Jnc7: Jnc7,
+     Jnc8: Jnc8,
+     Jnc9: Jnc9,
+     Jnc10: Jnc10,
+     Jnc11: Jnc11,
+     Jnc12: Jnc12,
+     Jnc13: Jnc13,
+     Jnc14: Jnc14,
+     Jnc15: Jnc15,
+     Jnc16: Jnc16,
+     Jnc17: Jnc17,
+     Jnc18: Jnc18,
+     Jnc19: Jnc19,
+     Jnc20: Jnc20,
+     Jnc21: Jnc21,
+     Jnc22: Jnc22,
+     Jnc23: Jnc23,
+     Jnc24: Jnc24,
+     Jnc25: Jnc25,
+     Jnc26: Jnc26,
+     Jnc27: Jnc27,
+     Jnc28: Jnc28,
+    
+     };
+         
+     google.script.run.withSuccessHandler(Simpan).SimpanData(Data); 
+      function Simpan(kembali) {  
+      var m = "Data berhasil disimpan!";
+       boxMsgBox(m);
+      Bersih();  
+    }
+    }
+    }
+     
+    document.getElementById("btnubah").addEventListener("click", Ubah);
+       
+       function Ubah(){
+       
+       var Jnc1 = document.getElementById("Jnc1").value;
+       var Jnc2 = document.getElementById("Jnc2").value;
+       var Jnc3 = document.getElementById("Jnc3").value;
+       var Jnc4 = document.getElementById("Jnc4").value;
+       var Jnc5 = document.getElementById("Jnc5").value;
+       var Jnc6 = document.getElementById("Jnc6").value; 
+       var Jnc7 = document.getElementById("Jnc7").value;
+       var Jnc8 = document.getElementById("Jnc8").value; 
+       var Jnc9 = document.getElementById("Jnc9").value;
+       var Jnc10 = document.getElementById("Jnc10").value;
+       var Jnc11 = document.getElementById("Jnc11").value;
+       var Jnc12 = document.getElementById("Jnc12").value;
+       var Jnc13 = document.getElementById("Jnc13").value;
+       var Jnc14 = document.getElementById("Jnc14").value; 
+       var Jnc15 = document.getElementById("Jnc15").value;
+       var Jnc16 = document.getElementById("Jnc16").value;
+       var Jnc17 = document.getElementById("Jnc17").value;
+       var Jnc18 = document.getElementById("Jnc18").value;
+       var Jnc19 = document.getElementById("Jnc19").value;
+       var Jnc20 = document.getElementById("Jnc20").value;
+       var Jnc21 = document.getElementById("Jnc21").value;
+       var Jnc22 = document.getElementById("Jnc22").value;
+       var Jnc23 = document.getElementById("Jnc23").value;
+       var Jnc24 = document.getElementById("Jnc24").value;
+       var Jnc25 = document.getElementById("Jnc25").value;
+       var Jnc26 = document.getElementById("Jnc26").value;
+       var Jnc27 = document.getElementById("Jnc27").value;
+       var Jnc28 = document.getElementById("Jnc28").value;
+    
+       
+        
+       
+    if (Jnc1.trim().length == 0 || Jnc2.trim().length == 0 || Jnc3.trim().length == 0 || Jnc4.trim().length == 0 || 
+    Jnc5.trim().length == 0 || Jnc6.trim().length == 0 || Jnc7.trim().length == 0 || Jnc8.trim().length == 0|| Jnc9.trim().length == 0 || Jnc10.trim().length == 0 || Jnc11.trim().length == 0 || Jnc12.trim().length == 0 || Jnc13.trim().length == 0 || Jnc14.trim().length == 0|| Jnc15.trim().length == 0 || Jnc16.trim().length == 0 || Jnc17.trim().length == 0 || Jnc18.trim().length == 0 || Jnc19.trim().length == 0 || Jnc20.trim().length == 0|| Jnc21.trim().length == 0 || Jnc22.trim().length == 0|| Jnc23.trim().length == 0|| Jnc24.trim().length == 0|| Jnc25.trim().length == 0|| Jnc26.trim().length == 0|| Jnc27.trim().length == 0|| Jnc28.trim().length == 0){
+       
+       var m = "Fill in all fields or fill in the number 0!";
+       boxMsgBox(m);
+         
+       }else{
+       
+     var Data ={ 
+     Jnc1: Jnc1,
+     Jnc2: Jnc2,
+     Jnc3: Jnc3,
+     Jnc4: Jnc4,
+     Jnc5: Jnc5,
+     Jnc6: Jnc6,
+     Jnc7: Jnc7,
+     Jnc8: Jnc8,
+     Jnc9: Jnc9,
+     Jnc10: Jnc10,
+     Jnc11: Jnc11,
+     Jnc12: Jnc12,
+     Jnc13: Jnc13,
+     Jnc14: Jnc14,
+     Jnc15: Jnc15,
+     Jnc16: Jnc16,
+     Jnc17: Jnc17,
+     Jnc18: Jnc18,
+     Jnc19: Jnc19,
+     Jnc20: Jnc20,
+     Jnc21: Jnc21,
+     Jnc22: Jnc22,
+     Jnc23: Jnc23,
+     Jnc24: Jnc24,
+     Jnc25: Jnc25,
+     Jnc26: Jnc26,
+     Jnc27: Jnc27,
+     Jnc28: Jnc28,
+    
+     };
+        
+     google.script.run.withSuccessHandler(Ubah).UbahData(Data);
+       
+      function Ubah(kembali) {
+    
+      if(kembali != "NISN tidak ditemukan!" ){
+       var m = "Data successfully updated!";
+       boxMsgBox(m);
+      Bersih();
+      }else{
+       var m = "Data Not Found!";
+       boxMsgBox(m);
+    }
+    }
+    }
+    }    
+    </script>

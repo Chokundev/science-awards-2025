@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sciences Awards 2025</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700&display=swap');
+        body {
+            font-family: "Chakra Petch", sans-serif;
+            background-color: #f8f9fa;
+        }
+        img {
+            border-radius: 0.625rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <!-- Content Section -->
+    <div class="container mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Image Section -->
+            <div>
+                <img src="https://science-awards.pages.dev/img/blank.png" 
+                class="w-full h-auto" alt="" id="img">
+            </div>
+
+            <!-- Form Section -->
+            <div class="col-span-2">
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <!-- Search Section -->
+                    
+                    <div class="flex items-center gap-4 mb-6">
+                      
+                        <div class="flex-grow">
+                            <h5 class="font-bold text-lg">📌 เลือกไอดีผู้เข้าประกวด</h5>
+                            <form id="search">
+                            <select id="id" class="form-select block w-full px-4 py-2 mt-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-300">
+                                <option value="" selected disabled>-- เลือกไอดีผู้เข้าประกวด --</option>
+                                <option value="BS01">BS01</option>
+                                <option value="BS02">BS02</option>
+                                <option value="BS03">BS03</option>
+                                <option value="BS04">BS04</option>
+                                <option value="BS05">BS05</option>
+
+                                <option value="GS01">GS01</option>
+                                <option value="GS02">GS02</option>
+                                <option value="GS03">GS03</option>
+                                <option value="GS04">GS04</option>
+                                <option value="GS05">GS05</option>
+
+                                <option value="SS01">GS01</option>
+                                <option value="SS02">GS02</option>
+                                <option value="SS03">GS03</option>
+                                <option value="SS04">GS04</option>
+                                <option value="SS05">GS05</option>
+                            </select>
+                            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg mt-6" id="find" type="submit">ดึงข้อมูล</button>
+                            </form>
+                        </div>
+                    </div>
+                    
+
+                    <hr class="my-4">
+
+                    <!-- Contestant Information Section -->
+                    <form id="myForm">
+                    <h5 class="font-bold text-lg mb-4">📌 ข้อมูลผู้เข้าประกวด</h5>
+                    <div class="mb-4">
+                        <label for="contestantID" class="block font-medium">รหัสผู้เข้าประกวด</label>
+                        <input type="text" class="form-input w-full px-4 py-2 border border-gray-300 rounded-md" id="contestantID" disabled>
+                    </div>
+                    <div class="mb-4">
+                        <label for="name" class="block font-medium">ชื่อ-สกุล</label>
+                        <input type="text" class="form-input w-full px-4 py-2 border border-gray-300 rounded-md" id="name" disabled>
+                    </div>
+                    <div class="mb-4">
+                        <label for="branch" class="block font-medium">สาขา</label>
+                        <input type="text" class="form-input w-full px-4 py-2 border border-gray-300 rounded-md" id="branch" disabled>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <!-- Grade Section -->
+                    <h5 class="font-bold text-lg mb-4">📌 บันทึกผลคะแนนการประกวด</h5>
+                    <div class="mb-4">
+                        <label for="grade1" class="block font-medium">เกณฑ์ที่ 1 (เต็ม 20 คะแนน)</label>
+                        <input type="number" class="form-input w-full px-4 py-2 border border-gray-300 rounded-md" id="grade1" min="0" max="20">
+                    </div>
+                    <div class="mb-4">
+                        <label for="grade2" class="block font-medium">เกณฑ์ที่ 2 (เต็ม 20 คะแนน)</label>
+                        <input type="number" class="form-input w-full px-4 py-2 border border-gray-300 rounded-md" id="grade2" min="0" max="20">
+                    </div>
+                    <div class="mb-4">
+                        <label for="grade3" class="block font-medium">เกณฑ์ที่ 3 (เต็ม 20 คะแนน)</label>
+                        <input type="number" class="form-input w-full px-4 py-2 border border-gray-300 rounded-md" id="grade3" min="0" max="20">
+                    </div>
+                    <div class="mb-4">
+                        <label for="grade4" class="block font-medium">เกณฑ์ที่ 4 (เต็ม 20 คะแนน)</label>
+                        <input type="number" class="form-input w-full px-4 py-2 border border-gray-300 rounded-md" id="grade4" min="0" max="20">
+                    </div>
+                    <div class="mb-4">
+                        <label for="grade5" class="block font-medium">เกณฑ์ที่ 5 (เต็ม 20 คะแนน)</label>
+                        <input type="number" class="form-input w-full px-4 py-2 border border-gray-300 rounded-md" id="grade5" min="0" max="20">
+                    </div>
+                    <label for="status" class="block font-medium">สถานะการบันทึกผลการประกวด</label>
+                    <select id="status" class="form-select block w-full px-4 py-2 mt-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-300">
+                                <option value="" selected disabled>-- เลือกสถานะการบันทึกผลการประกวด --</option>
+                                <option value="ยังบันทึกไม่ครบทุกเกณฑ์">ยังบันทึกไม่ครบทุกเกณฑ์</option>
+                                <option value="บันทึกครบทุกเกณฑ์">บันทึกครบทุกเกณฑ์</option>
+                            </select>
+
+                    <!-- Save Button -->
+                    <div class="text-center mt-6">
+                        <button class="bg-blue-600 text-white px-6 py-2 rounded-lg" id="update" style="display:none;">บันทึกข้อมูล</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script>
+      document.getElementById('find').addEventListener('click',find)   
+      document.getElementById('update').addEventListener('click',update)   
+
+
+
+      //คำสั่งค้นหาข้อมูลเพื่อแก้ไข ลบ
+      function find(){
+        event.preventDefault()
+        $('#find').hide()
+        var record = document.getElementById('id').value
+        google.script.run.withSuccessHandler(findSuccess).findRecord(record)
+        let timerInterval;
+          Swal.fire({
+            title: "กำลังดึงข้อมูลผู้เข้าประกวด",
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: () => {
+              Swal.showLoading();
+              const timer = Swal.getPopup().querySelector("b");
+              timerInterval = setInterval(() => {
+                timer.textContent = `${Swal.getTimerLeft()}`;
+              }, 100);
+            },
+            willClose: () => {
+              clearInterval(timerInterval);
+            }
+          }).then((result) => {
+            /* Read more about handling dismissals below */
+            if (result.dismiss === Swal.DismissReason.timer) {
+              console.log("I was closed by the timer");
+            }
+          });
+      }
+
+     function findSuccess(output){
+      let timerInterval;
+          Swal.fire({
+            icon: 'success',
+            title: "ดึงข้อมูลผู้เข้าประกวดสำเร็จ",
+            timer: 2000,
+            timerProgressBar: false,
+            didOpen: () => {
+              // Swal.showLoading();
+              const timer = Swal.getPopup().querySelector("b");
+              timerInterval = setInterval(() => {
+                timer.textContent = `${Swal.getTimerLeft()}`;
+              }, 100);
+            },
+            willClose: () => {
+              clearInterval(timerInterval);
+            }
+          }).then((result) => {
+            /* Read more about handling dismissals below */
+            if (result.dismiss === Swal.DismissReason.timer) {
+              console.log("I was closed by the timer");
+            }
+          });
+      console.log(output)
+       if(output.result == true){
+       document.getElementById('contestantID').value = output.data[0]
+       document.getElementById('name').value = output.data[1]
+       document.getElementById('branch').value = output.data[2]
+       document.getElementById('img').src = output.data[3]
+       document.getElementById('grade1').value = output.data[4]
+       document.getElementById('grade2').value = output.data[5]
+       document.getElementById('grade3').value = output.data[6]
+       document.getElementById('grade4').value = output.data[7]
+       document.getElementById('grade5').value = output.data[8]
+       document.getElementById('status').value = output.data[9]
+       document.getElementById('contestantID').disabled = true
+       document.getElementById('name').disabled = true
+       document.getElementById('branch').disabled = true
+          
+          $('#find').show()
+          $('#update').show()
+
+       }else{
+         Swal.fire({
+          icon: 'error',
+          title: 'ไม่พบข้อมูลผู้เข้าประกวด',
+          showConfirmButton: true
+        });
+          $('#find').show()
+          }
+       }
+
+      //คำสั่งแก้ไข
+      function update(){
+        event.preventDefault()
+         $('#update').hide()
+
+        let timerInterval;
+          Swal.fire({
+            title: "กำลังบันทึกผลคะแนนการประกวด",
+            timer: 4000,
+            timerProgressBar: true,
+            didOpen: () => {
+              Swal.showLoading();
+              const timer = Swal.getPopup().querySelector("b");
+              timerInterval = setInterval(() => {
+                timer.textContent = `${Swal.getTimerLeft()}`;
+              }, 100);
+            },
+            willClose: () => {
+              clearInterval(timerInterval);
+            }
+          }).then((result) => {
+            /* Read more about handling dismissals below */
+            if (result.dismiss === Swal.DismissReason.timer) {
+              console.log("I was closed by the timer");
+            }
+          });
+
+
+
+        var obj = {}
+        obj.contestantID = document.getElementById('contestantID').value 
+        obj.name = document.getElementById('name').value 
+        obj.branch = document.getElementById('branch').value
+        obj.grade1 = document.getElementById('grade1').value 
+        obj.grade2 = document.getElementById('grade2').value 
+        obj.grade3 = document.getElementById('grade3').value    
+        obj.grade4 = document.getElementById('grade4').value     
+        obj.grade5 = document.getElementById('grade5').value      
+        obj.status = document.getElementById('status').value       
+        google.script.run.withSuccessHandler(updateSuccess).updateRecord(obj)
+      }
+      function updateSuccess(data){
+          document.getElementById('myForm').reset() 
+          document.getElementById('search').reset() 
+          document.getElementById('img').src = "https://science-awards.pages.dev/img/blank.png"
+           $('#update').show()
+
+          Swal.fire({
+            title: "บันทึกสำเร็จ",
+            text: "บันทึกผลคะแนนการประกวดสำเร็จ",
+            icon: "success"
+          });
+         
+          }
+
+
+
+
+           
+  </script>
+
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
+
+</body>
+</html>

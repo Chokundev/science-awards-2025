@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <title>ระบบรายงานผลคะแนน นาคาเกมส์ ver.1</title>
+</head>
+<?!= include('stylecss'); ?>
+
+<body>
+    <div id="Komponen"></div>
+    <div id="BoxMessage">
+
+        <div>
+            <div id="JudulMsg"></div>
+            <div id="IsiMsg"></div>
+            <div id="AkhirMsg"></div>
+        </div>
+    </div>
+
+    <div id="objek">
+        <center><img src="https://sci.rmutp.ac.th/web2558/wp-content/uploads/2017/11/SciRMUTP-Thai-300x295.png" width="4000px" id="logo"><br>
+            <h3 style="margin-top: 3px;" id="title">การประกวดดาว-เดือน คณะวิทยาศาสตร์และเทคโนโลยี (SCIENCE AWARDS 2025)<br></h3>
+        </center>
+        <hr style="width:85%;margin-top:-10px">
+
+        <center>
+            <h4 style="margin-top: 3px;font-size: 15px;" id="name">แบบรายงานผลการประกวดดาว-เดือน (SCIENCE AWARDS 2025) ตามประเภทการประกวด</h4>
+        </center>
+
+        <div class="row" style="margin-left:8%;">
+            <label>ID ประเภทการประกวด <span style="margin-left: 60px;font-size: 12px;">:</span></label>
+            <!-- <input id="Jnc1" style="width: 12%;font-size: 15px;" type="" name="" placeholder="กรอกเลขประจำตัว"> -->
+            <select id="Jnc1">
+              <option value="01">[01] : MISTER SCI RMUTP</option>
+              <option value="02">[02] : MISS SCI RMUTP</option>
+              <option value="03">[03] : SEASON SCI RMUTP</option>
+            </select>
+            <button id="btncari" style="width: Auto; height: 22px;background-color:#91d6ed;">ค้นหา</button><br>
+
+            <label>ชื่อการประกวด <span style="margin-left: 17px;font-size: 12px;">:</span></label>
+            <input id="Jnc2" style="width: 25%;font-size: 15px;" type="" name="" disabled><br><br>
+            
+            <div style="display:none;">
+            <label>ครูที่ปรึกษา <span style="margin-left: 6px;font-size: 12px;">:</span></label>
+            <input id="" style="width: 12%;font-size: 15px;" type="" name="" disabled><br><br>
+            <label>ชั้น <span style="margin-left: 60px;font-size: 12px;">:</span></label>
+            <input id="" style="width: 12%;font-size: 15px;" type="" name="" disabled></div>
+        </div>
+
+        <?!= include('css'); ?>
+        <br>
+        <!-- <div class="container-fluid p-0">
+      <nav class="navbar navbar-expand-lg">
+          <ul class="navbar-nav"style="font-size:13px;">
+            <a class="nav-item dropdown">
+              <div class="dropdown">
+                <a class="nav-link"style="color:#000;margin-left:5%;">
+                <img src="https://drive.google.com/uc?id=1URkLsYAIwkbutyf3jXsJyrtrW7a16gy8"style="width:20px"></a>
+                <div class="dropdown-content"style="margin-left:5%;">
+                  <button id = "btncari" style="width: 100%; height: 22px;background-color:#91d6ed;">SEARCH</button><br>
+                  <button id = "btnbersih" style="width: 100%; height: 22px;background-color:#dbd524;">RESTART</button><br>
+                  <button id = "btnubah" style="width: 100%; height: 22px;background-color:#96ee96;">UPDATE</button><br>
+                  <button id = "btnhapus" style="width: 100%; height: 22px;background-color:#b17c7c;" onclick ="Confirm.Execute()">DELETE</button><br>
+                  <button id = "btnsimpan" style="width: 30%; height: 22px" value="Save" hidden> 
+                </div>
+              </div>
+          </ul>
+      </nav>
+    </div>  -->
+
+        <form action="" method="POST" id="form">
+            <center>
+                <table width=85%>
+
+                    <tr>
+                        <th rowspan="2" style="width: 3%;background-color:#CDEEFF;">ลำดับที่</th>
+                        <th rowspan="2" style="width: 6%;background-color:#CDEEFF;">รหัสผู้เข้าประกวด</th>
+                        <th rowspan="2" style="width: 6%;background-color:#CDEEFF;">คะแนน</th>
+                        <th rowspan="2" style="width: 6%;background-color:#CDEEFF;">ประเภทรางวัล</th>
+                    </tr>
+                    <tr>
+                    </tr>
+                    <tr>
+                        <td class="a" style="text-align: center;font-size:12px;">1</td>
+                        <td class="a"><input id="Jnc3" style="width: 99%;" type="text" name="" disabled></td>
+                        <td class="a"><input id="Jnc4" style="text-align: center;width: 98%;" type="text" name=""
+                                disabled></td>
+                        <td class="a"><input id="Jnc5" style="text-align: center;width: 98%;" type="text" name=""
+                                disabled></td>
+                    </tr>
+                    <tr>
+                        <td class="a" style="text-align: center;font-size:12px;">2</td>
+                        <td class="a"><input id="Jnc6" style="width: 99%;" type="text" name="" disabled></td>
+                        <td class="a"><input id="Jnc7" style="text-align: center;width: 98%;" type="text" name=""
+                                disabled></td>
+                        <td class="a"><input id="Jnc8" style="text-align: center;width: 98%;" type="text" name=""
+                                disabled></td>
+                    </tr>
+                    <tr>
+                        <td class="a" style="text-align: center;font-size:12px;">3</td>
+                        <td class="a"><input id="Jnc9" style="width: 99%;" type="text" name="" disabled></td>
+                        <td class="a"><input id="Jnc10" style="text-align: center;width: 98%;" type="text" name=""
+                                disabled></td>
+                        <td class="a"><input id="Jnc11" style="text-align: center;width: 98%;" type="text" name=""
+                                disabled></td>
+                    </tr>
+                    <tr>
+                        <td class="a" style="text-align: center;font-size:12px;">4</td>
+                        <td class="a"><input id="Jnc12" style="width: 99%;" type="text" name="" disabled></td>
+                        <td class="a"><input id="Jnc13" style="text-align: center;width: 98%;" type="text" name=""
+                                disabled></td>
+                        <td class="a"><input id="Jnc14" style="text-align: center;width: 98%;" type="text" name=""
+                                disabled></td>
+                    </tr>
+                    <tr>
+                        <td class="a" style="text-align: center;font-size:12px;">5</td>
+                        <td class="a"><input id="Jnc15" style="width: 99%;" type="text" name="" disabled></td>
+                        <td class="a"><input id="Jnc16" style="text-align: center;width: 98%;" type="text" name=""
+                                disabled></td>
+                        <td class="a"><input id="Jnc17" style="text-align: center;width: 98%;" type="text" name=""
+                                disabled></td>
+                    </tr>
+                </table>
+                <br>
+            </center>
+            <center>
+              <h6 id="footer"></h6>
+              <h6 id="copyright"></h6>
+            </center>
+        </form>
+    </div>
+
+
+    <p align="center">
+        <input style="width: 10%;" type="button" id="printbtn" onclick="print('form')" value="🖨️ พิมพ์รายงาน">
+    </p>
+    <script>
+        function Print(form) {
+            var printdata = document.getElementById(form);
+            newwin = window.open("");
+            newwin.document.write(printdata.outerHTML);
+            newwin.print();
+            newwin.close();
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    
+    <script>
+  
+  document.addEventListener('DOMContentLoaded',function(){
+
+    setInterval(function(){
+
+      let logo = document.getElementById('logo');
+      let title = document.getElementById('title');
+      let name = document.getElementById('name');
+      let footer = document.getElementById('footer');
+      let copyright = document.getElementById('copyright');
+      
+      
+      google.script.run
+      .withSuccessHandler(data => {
+
+        logo.src = data[0];
+        title.innerHTML = data[1];
+        name.innerHTML = data[2];
+        footer.innerHTML = data[3];
+        copyright.innerHTML = data[4];
+        
+      })
+      .setAutomatically();
+    }, 1000)
+  })
+ 
+ 
+</script>
+
+    <?!= include('Form-js'); ?>
+    <?!= include('js'); ?>
+</body>
+
+</html>

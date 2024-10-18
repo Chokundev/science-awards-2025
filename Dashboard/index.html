@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300&display=swap');
+
+        * {
+            font-family: 'Chakra Petch', sans-serif;
+        }
+    </style>
+
+    <div class="container mx-auto py-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Card for MR. SCI RMUTP -->
+            <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md p-4">
+                <h2 class="text-lg font-bold mb-4">ผลการประกวด MR. SCI RMUTP</h2>
+                <canvas id="mrChart"></canvas>
+            </div>
+
+            <!-- Card for MS. SCI RMUTP -->
+            <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md p-4">
+                <h2 class="text-lg font-bold mb-4">ผลการประกวด MS. SCI RMUTP</h2>
+                <canvas id="msChart"></canvas>
+            </div>
+
+            <!-- Card for SEASON SCI RMUTP -->
+            <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md p-4">
+                <h2 class="text-lg font-bold mb-4">ผลการประกวด SEASON SCI RMUTP</h2>
+                <canvas id="seasonChart"></canvas>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+            <!-- Card for MR. SCI RMUTP Progress -->
+            <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md p-4">
+                <h3 class="text-lg font-bold mb-4">สถานะการประกวด MR. SCI RMUTP</h3>
+                <!-- Progress bar for each judge -->
+                <div class="mb-4">
+                    <p class="text-sm text-gray-600 mb-1">กรรมการคนที่ 1</p>
+                    <div class="w-full bg-gray-200 rounded-full h-4 mb-2">
+                        <div class="bg-blue-500 h-4 rounded-full" style="width: 0%;" id="ref1_bs"></div>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <p class="text-sm text-gray-600 mb-1">กรรมการคนที่ 2</p>
+                    <div class="w-full bg-gray-200 rounded-full h-4 mb-2">
+                        <div class="bg-blue-500 h-4 rounded-full" style="width: 0%;" id="ref2_bs"></div>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <p class="text-sm text-gray-600 mb-1">กรรมการคนที่ 3</p>
+                    <div class="w-full bg-gray-200 rounded-full h-4 mb-2">
+                        <div class="bg-blue-500 h-4 rounded-full" style="width: 0%;" id="ref3_bs"></div>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <p class="text-sm text-gray-600 mb-1">กรรมการคนที่ 4</p>
+                    <div class="w-full bg-gray-200 rounded-full h-4 mb-2">
+                        <div class="bg-blue-500 h-4 rounded-full" style="width: 0%;" id="ref4_bs"></div>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <p class="text-sm text-gray-600 mb-1">กรรมการคนที่ 5</p>
+                    <div class="w-full bg-gray-200 rounded-full h-4 mb-2">
+                        <div class="bg-blue-500 h-4 rounded-full" style="width: 0%;" id="ref5_bs"></div>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <div class="p-2 text-center text-white bg-blue-500 rounded" id="print_bs">
+                        พร้อมพิมพ์รายงาน
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card for MS. SCI RMUTP Progress -->
+            <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md p-4">
+                <h3 class="text-lg font-bold mb-4">สถานะการประกวด MS. SCI RMUTP</h3>
+                <!-- Progress bar for each judge -->
+                <div class="mb-4">
+                    <p class="text-sm text-gray-600 mb-1">กรรมการคนที่ 1</p>
+                    <div class="w-full bg-gray-200 rounded-full h-4 mb-2">
+                        <div class="bg-pink-500 h-4 rounded-full" style="width: 0%;" id="ref1_gs"></div>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <p class="text-sm text-gray-600 mb-1">กรรมการคนที่ 2</p>
+                    <div class="w-full bg-gray-200 rounded-full h-4 mb-2">
+                        <div class="bg-pink-500 h-4 rounded-full" style="width: 0%;" id="ref2_gs"></div>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <p class="text-sm text-gray-600 mb-1">กรรมการคนที่ 3</p>
+                    <div class="w-full bg-gray-200 rounded-full h-4 mb-2">
+                        <div class="bg-pink-500 h-4 rounded-full" style="width: 0%;" id="ref3_gs"></div>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <p class="text-sm text-gray-600 mb-1">กรรมการคนที่ 4</p>
+                    <div class="w-full bg-gray-200 rounded-full h-4 mb-2">
+                        <div class="bg-pink-500 h-4 rounded-full" style="width: 0%;" id="ref4_gs"></div>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <p class="text-sm text-gray-600 mb-1">กรรมการคนที่ 5</p>
+                    <div class="w-full bg-gray-200 rounded-full h-4 mb-2">
+                        <div class="bg-pink-500 h-4 rounded-full" style="width: 0%;" id="ref5_gs"></div>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <div class="p-2 text-center text-white bg-pink-500 rounded" id="print_gs">
+                        พร้อมพิมพ์รายงาน
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card for SEASON SCI RMUTP Progress -->
+            <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md p-4">
+                <h3 class="text-lg font-bold mb-4">สถานะการประกวด SEASON SCI RMUTP</h3>
+                <!-- Progress bar for each judge -->
+                <div class="mb-4">
+                    <p class="text-sm text-gray-600 mb-1">กรรมการคนที่ 1</p>
+                    <div class="w-full bg-gray-200 rounded-full h-4 mb-2">
+                        <div class="bg-green-500 h-4 rounded-full" style="width: 0%;" id="ref1_ss"></div>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <p class="text-sm text-gray-600 mb-1">กรรมการคนที่ 2</p>
+                    <div class="w-full bg-gray-200 rounded-full h-4 mb-2">
+                        <div class="bg-green-500 h-4 rounded-full" style="width: 0%;" id="ref2_ss"></div>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <p class="text-sm text-gray-600 mb-1">กรรมการคนที่ 3</p>
+                    <div class="w-full bg-gray-200 rounded-full h-4 mb-2">
+                        <div class="bg-green-500 h-4 rounded-full" style="width: 0%;" id="ref3_ss"></div>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <p class="text-sm text-gray-600 mb-1">กรรมการคนที่ 4</p>
+                    <div class="w-full bg-gray-200 rounded-full h-4 mb-2">
+                        <div class="bg-green-500 h-4 rounded-full" style="width: 0%;" id="ref4_ss"></div>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <p class="text-sm text-gray-600 mb-1">กรรมการคนที่ 5</p>
+                    <div class="w-full bg-gray-200 rounded-full h-4 mb-2">
+                        <div class="bg-green-500 h-4 rounded-full" style="width: 0%;" id="ref5_ss"></div>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <div class="p-2 text-center text-white bg-green-500 rounded" id="print_ss">
+                        พร้อมพิมพ์รายงาน
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <script>
+        let mrChart, msChart, seasonChart;
+
+        function drawCharts(contestData) {
+            const mrLabels = contestData.mr.map(d => d.code);
+            const msLabels = contestData.ms.map(d => d.code);
+            const seasonLabels = contestData.season.map(d => d.code);
+
+            const mrScores = contestData.mr.map(d => d.score);
+            const msScores = contestData.ms.map(d => d.score);
+            const seasonScores = contestData.season.map(d => d.score);
+
+            // MR Chart
+            if (!mrChart) {
+                const mrCtx = document.getElementById('mrChart').getContext('2d');
+                mrChart = new Chart(mrCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: mrLabels,
+                        datasets: [{
+                            label: 'MR. SCI RMUTP',
+                            backgroundColor: 'rgb(110, 172, 218)',
+                            borderColor: 'rgb(110, 172, 210)',
+                            borderWidth: 1,
+                            data: mrScores
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        scales: {
+                            x: { beginAtZero: true }
+                        }
+                    }
+                });
+            } else {
+                mrChart.data.labels = mrLabels;
+                mrChart.data.datasets[0].data = mrScores;
+                mrChart.update();
+            }
+
+            // MS Chart
+            if (!msChart) {
+                const msCtx = document.getElementById('msChart').getContext('2d');
+                msChart = new Chart(msCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: msLabels,
+                        datasets: [{
+                            label: 'MS. SCI RMUTP',
+                            backgroundColor: 'rgb(255, 78, 136)',
+                            borderColor: 'rgb(255, 140, 158)',
+                            borderWidth: 1,
+                            data: msScores
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        scales: {
+                            x: { beginAtZero: true }
+                        }
+                    }
+                });
+            } else {
+                msChart.data.labels = msLabels;
+                msChart.data.datasets[0].data = msScores;
+                msChart.update();
+            }
+
+            // SEASON Chart
+            if (!seasonChart) {
+                const seasonCtx = document.getElementById('seasonChart').getContext('2d');
+                seasonChart = new Chart(seasonCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: seasonLabels,
+                        datasets: [{
+                            label: 'SEASON SCI RMUTP',
+                            backgroundColor: 'rgb(0, 255, 156)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1,
+                            data: seasonScores
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        scales: {
+                            x: { beginAtZero: true }
+                        }
+                    }
+                });
+            } else {
+                seasonChart.data.labels = seasonLabels;
+                seasonChart.data.datasets[0].data = seasonScores;
+                seasonChart.update();
+            }
+        }
+
+        // Fetch data every 1 second
+        function fetchData() {
+            google.script.run.withSuccessHandler(drawCharts).getData();
+        }
+
+        setInterval(fetchData, 1000);
+    </script>
+
+    <script>
+  
+  document.addEventListener('DOMContentLoaded',function(){
+
+    setInterval(function(){
+
+      let ref1_bs = document.getElementById('ref1_bs');
+      let ref2_bs = document.getElementById('ref2_bs');
+      let ref3_bs = document.getElementById('ref3_bs');
+      let ref4_bs = document.getElementById('ref4_bs');
+      let ref5_bs = document.getElementById('ref5_bs');
+
+      let ref1_gs = document.getElementById('ref1_gs');
+      let ref2_gs = document.getElementById('ref2_gs');
+      let ref3_gs = document.getElementById('ref3_gs');
+      let ref4_gs = document.getElementById('ref4_gs');
+      let ref5_gs = document.getElementById('ref5_gs');
+
+      let ref1_ss = document.getElementById('ref1_ss');
+      let ref2_ss = document.getElementById('ref2_ss');
+      let ref3_ss = document.getElementById('ref3_ss');
+      let ref4_ss = document.getElementById('ref4_ss');
+      let ref5_ss = document.getElementById('ref5_ss');
+
+      let print_bs = document.getElementById('print_bs');
+      let print_gs = document.getElementById('print_gs');
+      let print_ss = document.getElementById('print_ss');
+
+      google.script.run
+      .withSuccessHandler(data => {
+
+        ref1_bs.style.width = data[0] + '%';
+        ref2_bs.style.width = data[1] + '%';
+        ref3_bs.style.width = data[2] + '%';
+        ref4_bs.style.width = data[3] + '%';
+        ref5_bs.style.width = data[4] + '%';
+
+        ref1_gs.style.width = data[5] + '%';
+        ref2_gs.style.width = data[6] + '%';
+        ref3_gs.style.width = data[7] + '%';
+        ref4_gs.style.width = data[8] + '%';
+        ref5_gs.style.width = data[9] + '%';
+
+        ref1_ss.style.width = data[10] + '%';
+        ref2_ss.style.width = data[11] + '%';
+        ref3_ss.style.width = data[12] + '%';
+        ref4_ss.style.width = data[13] + '%';
+        ref5_ss.style.width = data[14] + '%';
+
+        print_bs.innerHTML = data[15];
+        print_gs.innerHTML = data[16];
+        print_ss.innerHTML = data[17];
+
+        
+
+        
+      
+      })
+      .setAutomatically();
+    }, 1000)
+  })
+ 
+ 
+</script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+</body>
+
+</html>
